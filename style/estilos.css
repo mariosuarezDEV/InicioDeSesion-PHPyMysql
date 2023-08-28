@@ -1,0 +1,132 @@
+*{
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.titulo{
+    color: #045CAC;
+    font-size: 3.5vw;
+    text-align: center;
+}
+
+form{
+    margin-top: 4%;
+    /*background-color:#04AC4C ;*/
+    padding: 15px 30px 15px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+input{
+    margin-top: 30px;
+}
+
+
+/* Estilos para el input de tipo password */
+input[type="password"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #045CAC;
+    padding: 5px;
+    color: #000;
+    font-size: 14px;
+    width: 55%;
+    height: 5vh;
+}
+
+input[type="password"]::placeholder {
+    color: gray;
+}
+
+input[type="password"]:hover::placeholder {
+    color: transparent;
+}
+
+input[type="password"]:hover{
+    border-bottom: 2px solid #045CAC;
+}
+
+
+/*estilos para el boton*/
+
+input[type="submit"]{
+    margin-top: 30px;
+    background-color: #04AC4C;
+    border: none;
+    padding: 12px 50px 12px 50px;
+    color: white;
+    border-radius: 1vw;
+    width: 40%;
+    font-size: 15px;
+    cursor: pointer; /* Cambiar el cursor a una mano */
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+input[type="submit"]:hover{
+    background-color: #029642;
+}
+
+a{
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+/* Estilos para el input de tipo text */
+input[type="text"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #045CAC;
+    padding: 5px;
+    color: #000;
+    font-size: 14px;
+    width: 55%;
+    height: 5vh;
+}
+
+input[type="text"]::placeholder {
+    color: gray;
+}
+
+input[type="text"]:hover::placeholder {
+    color: transparent;
+}
+
+input[type="text"]:hover{
+    border-bottom: 2px solid #045CAC;
+}
+
+
+input[type="email"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #045CAC;
+    padding: 5px;
+    color: #000;
+    font-size: 14px;
+    width: 55%;
+    height: 5vh;
+}
+
+input[type="email"]::placeholder {
+    color: gray;
+}
+
+input[type="email"]:hover::placeholder {
+    color: transparent;
+}
+
+input[type="email"]:hover{
+    border-bottom: 2px solid #045CAC;
+}
+
+.mensaje{
+    text-align: center;
+    color: #e72a2a;
+}
+.correcto{
+    text-align: center;
+    color: #04AC4C;
+}
