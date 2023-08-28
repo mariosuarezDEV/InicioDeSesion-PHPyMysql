@@ -1,18 +1,44 @@
 <?php
-#consulta para iniciar sesion
 
-require 'toBD.php';
+#variables de acceso
 
-if (conexion() == false){
-    #no se hace nada, la pagina no continua
-} else{
-    #en caso de que la conexion sea correcta
-    $enlace = conexion();
-    $query = <<< CONSULTA
-    "select " 
-    CONSULTA;
+$resultado = null;
 
-}
+    function login($email,$passwd){
+        session_start();
+        #conexion a la base de datos
+        require 'toBD.php';
+        $conn = conexion();
+    
+        $sql = mysqli_prepare($conn,"select matricula,clave from usr where correo = ?");
+        mysqli_stmt_bind_param($sql,"s",$email);
+        mysqli_execute($sql);
+    
+        $resultado = mysqli_stmt_get_result($sql);
+    
+        if($fila = mysqli_fetch_assoc($resultado)){
+            $matricula = $fila['matricula'];
+            $binario = $fila['clave'];
+            #vamos a verificar la contraseña
+            if (password_verify($passwd,$binario)){
+                $_SESSION['matricula'] = $matricula;
+                mysqli_stmt_close($sql);
+                mysqli_close(conexion());
+                return [true,$matricula];
 
+            } else{
+                mysqli_stmt_close($sql);
+                mysqli_close(conexion());
+                return false;
+            } 
+        }else{
+            mysqli_stmt_close($sql);
+                mysqli_close(conexion());
+            return false;
+        }
+
+        
+    }
+    
 
 ?>

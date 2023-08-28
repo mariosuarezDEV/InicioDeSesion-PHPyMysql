@@ -1,12 +1,12 @@
 <?php
 
-require 'toBD.php';
-$conn = conexion();
+require 'login.php';
 
 $passwd_usr = "";
 $email_usr = "";
-$aviso="";
-$resultado = null;
+$matri = "";
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['entrar'])) {
         $email_usr = $_POST['correo'];
@@ -15,25 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($email_usr == "" || $passwd_usr ==""){
             $aviso = '<div class="negativo">¡Llena todos los campos!</div>';
         } else{
-            $sql = mysqli_prepare($conn,"select clave from usr where correo = ?");
-            mysqli_stmt_bind_param($sql,"s",$email_usr);
-            mysqli_execute($sql);
-
-            $resultado = mysqli_stmt_get_result($sql);
-
-            if($fila = mysqli_fetch_assoc($resultado)){
-                $binario = $fila['clave'];
-                #vamos a verificar la contraseña
-                if (password_verify($passwd_usr,$binario)){
-                    $aviso = '<div class="positivo">Cuenta correcta</div>';
-                } else{
-                    $aviso = '<div class="negativo">¡Contraseña incorrecta!</div>';
-                }
+            $paso = login($email_usr,$passwd_usr);
+            if($paso[0] === true){
+                #$matri = $paso[1];
+                header('Location: panel.php');
+                exit();
             } else{
-                $aviso = '<div class="negativo">¡Correo no registrado!</div>';
+                $aviso = '<div class="negativo">Cuenta incorrecta!</div>';
             }
         }
-        #echo('contraseña ingresada: '.$passwd_usr);
     }else{
         #echo 'No hay nada:/';
     }
