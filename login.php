@@ -10,7 +10,7 @@ $resultado = null;
         require 'toBD.php';
         $conn = conexion();
     
-        $sql = mysqli_prepare($conn,"select matricula,clave from usr where correo = ?");
+        $sql = mysqli_prepare($conn,"SELECT matricula,clave from usr where correo = ?");
         mysqli_stmt_bind_param($sql,"s",$email);
         mysqli_execute($sql);
     

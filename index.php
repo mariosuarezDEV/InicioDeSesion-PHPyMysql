@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="submit" name="entrar" value="Inciar sesion">
 
                 <a href="http://" target="_blank" rel="noopener noreferrer">Recuperar mi contraseña</a>
-                <a href="registrar.php">Crear una cuenta!</a>
+                <a href="registrar.php">¡Crear una cuenta!</a>
             </form>
             
         </div>

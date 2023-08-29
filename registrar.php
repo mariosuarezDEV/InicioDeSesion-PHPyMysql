@@ -19,23 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($nombre == "" || $apellidoP == "" || $apellidoM == "" || $clave == "" || $correo == ""){
             $mensaje = "¡Faltando datos por llenar!";
         } else{
-                #encriptamos clave
-                require 'encriptar.php';
-                require 'toBD.php';
-                $clave_toBD = encript(($clave));
-                $conn = conexion();
-                #haciendo la consulta parametrizada
-                $sql = mysqli_prepare($conn,"INSERT INTO usr (nombre,apellidoP,apellidoM,correo,clave) values (?, ?, ?, ?, ?)");
-
-                mysqli_stmt_bind_param($sql,"sssss", $nombre,$apellidoP,$apellidoM,$correo,$clave_toBD);
-
-                if(mysqli_stmt_execute($sql) == true){
-                    #$mensaje = '<div class="correcto">¡Datos guardados!</div>';
-                    $flag = true;
+                require 'createuser.php';
+                
+                $bandera = buscarCorreo($correo);
+                if ($bandera == true){
+                    $flag = registrar($nombre,$apellidoP,$apellidoM,$correo,$clave);
                 } else{
-                    $mensaje = '<div class="mensaje">¡Los datos no se subieron al servidor!</div>';
+                    $flag = false;
+                    $mensaje = 'El correo ya esta siendo utilizado';
                 }
-                mysqli_stmt_close($sql);
+                #registrar($nombre,$apellidoP,$apellidoM,$correo,$clave);
             }
     }else{
         #echo 'No hay nada:/';
@@ -70,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <div class="mensaje">
             <?php
-                echo $mensaje;
-                if($flag == true){
+                if ($flag == true){
                     header("Location: sesion.php"); // Redirige después de la inserción
-                    exit(); 
+                } else{
+                    echo $mensaje;
                 }
             ?>
         </div>
