@@ -9,6 +9,11 @@
     text-align: center;
 }
 
+h3{
+    color: #045CAC;
+    text-align: center;
+}
+
 .index{
     display: flex;
     flex-direction: row;

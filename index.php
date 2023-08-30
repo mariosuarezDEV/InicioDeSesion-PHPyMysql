@@ -1,6 +1,6 @@
 <?php
 
-require 'login.php';
+require 'enter_user.php';
 
 $passwd_usr = "";
 $email_usr = "";
@@ -9,8 +9,8 @@ $matri = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['entrar'])) {
-        $email_usr = $_POST['correo'];
-        $passwd_usr = $_POST['passwd'];
+        $email_usr =  htmlspecialchars($_POST['correo']);
+        $passwd_usr = htmlspecialchars($_POST['passwd']);
         #validar que los campos esten llenos
         if ($email_usr == "" || $passwd_usr ==""){
             $aviso = '<div class="negativo">¡Llena todos los campos!</div>';
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $paso = login($email_usr,$passwd_usr);
             if($paso[0] === true){
                 #$matri = $paso[1];
-                header('Location: panel.php');
+                header('Location: administrator.php');
                 exit();
             } else{
                 $aviso = '<div class="negativo">Cuenta incorrecta!</div>';
@@ -49,8 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Formulario -->
         <div class="form">
             <h1 class="titulo">
-                Facultad de<br>Estadística e Informática
+                NOTAS FEI
             </h1>
+            <h3>
+                ¡Notas para la facultad!
+            </h3>
             <form action="" name="login" method="post" class="inputs">
                 <input type="email" name="correo" id="" placeholder="Ingresa tu correo electronico">
                 
@@ -65,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="submit" name="entrar" value="Inciar sesion">
 
                 <a href="http://" target="_blank" rel="noopener noreferrer">Recuperar mi contraseña</a>
-                <a href="registrar.php">¡Crear una cuenta!</a>
+                <a href="sign_up_page.php">¡Crear una cuenta!</a>
             </form>
             
         </div>
